@@ -1,11 +1,14 @@
 package hh.swd20.KeikkaListaus.domain;
 
+
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
+
 
 
 
@@ -17,18 +20,31 @@ public class Artisti {
 	private Long artistiId;
 	private String artistiNimi;
 	
-	@ManyToOne
-	@JoinColumn
-	private Keikka keikka;
+	@ManyToMany(mappedBy = "artistiListaus")
+	private List <Keikka> keikat;
+
 	
 	
-	public Artisti(String artistiNimi) {
+	public Artisti(String artistiNimi, List<Keikka> keikat) {
 		super();
 		this.artistiNimi = artistiNimi;
+		this.keikat = keikat;
+		
 	}
 	
 	public Artisti() {
 		
+	}
+	
+
+
+
+	public List<Keikka> getKeikat() {
+		return keikat;
+	}
+
+	public void setKeikat(List<Keikka> keikat) {
+		this.keikat = keikat;
 	}
 
 	public Long getArtistiId() {

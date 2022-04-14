@@ -1,11 +1,13 @@
 package hh.swd20.KeikkaListaus.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 
@@ -18,19 +20,30 @@ public class Kategoria {
 	private String tyyppi;
 	private String genre;
 
-	@ManyToOne
-	@JoinColumn
-	private Keikka keikka;
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "kategoria")
+	private List <Keikka> keikat;
 	
-	public Kategoria(String tyyppi, String genre) {
+	public Kategoria(String tyyppi, String genre, List <Keikka> keikat) {
 		super();
 		this.tyyppi=tyyppi;
 		this.genre=genre;
+		this.keikat = keikat;
 		
 	}
 	
+
+
 	public Kategoria() {
 		
+	}
+	
+
+	public List<Keikka> getKeikat() {
+		return keikat;
+	}
+
+	public void setKeikat(List<Keikka> keikat) {
+		this.keikat = keikat;
 	}
 
 	public Long getKategoriaId() {
@@ -57,12 +70,6 @@ public class Kategoria {
 		this.genre = genre;
 	}
 
-	public Keikka getKeikka() {
-		return keikka;
-	}
 
-	public void setKeikka(Keikka keikka) {
-		this.keikka = keikka;
-	}
 	
 }

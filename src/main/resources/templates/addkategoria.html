@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Kategoria</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Kategoriat</h1>
+	
+		<form method="post" action="#" th:action="@{/savekategoria}" th:object= ${kategoriat} > 
+ 		<p>Tyyppi: <input type="text" th:field="${kategoria.tyyppi}" /></p>
+ 		<p>Genre: <input type="text" th:field="${kategoria.genre}"/></p>
+		<input type="submit" value="Submit" />
+		</form>
+	
+</body>
+</html>

@@ -1,5 +1,8 @@
 package hh.swd20.KeikkaListaus;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -28,15 +31,22 @@ public class KeikkaListausApplication {
 	public CommandLineRunner demo(KeikkaRepository kRepository, ArtistiRepository aRepository, KategoriaRepository kaRepository) {
 		return (args) -> {
 			log.info("lisää muutama keikka");
-			Keikka keikka1 = new Keikka("Dannyn Juhlapäivä", "28.5.2022",75.00,"Kaisaniemenpuisto");
 			
+			
+			
+			Kategoria kate1 = new Kategoria("Festarit","Indie-rock",null);
+			kaRepository.save(kate1);
+			
+			Artisti artisti1 = new Artisti("Danny",null) ;
+			//aRepository.save(artisti1);
+			
+			List<Artisti> keikan1Artistit = new ArrayList<Artisti>();
+			keikan1Artistit.add(artisti1);
+			
+			Keikka keikka1 = new Keikka("Dannyn Juhlapäivä", "28.5.2022",75.00,"Kaisaniemenpuisto",keikan1Artistit,kate1);
 			kRepository.save(keikka1);
 			
-			Artisti artisti1 = new Artisti("Danny");
-			aRepository.save(artisti1);
 			
-			Kategoria kate1 = new Kategoria("Festarit","Indie-rock");
-			kaRepository.save(kate1);
 			log.info("hae kaikki keikat");
 			for (Keikka keikka : kRepository.findAll()) {
 				log.info(keikka.toString());

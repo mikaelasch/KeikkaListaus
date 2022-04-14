@@ -7,7 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+
 
 
 
@@ -22,22 +27,32 @@ public class Keikka {
 	private double hinta;
 	private String lokaatio;
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy = "artistiNimi")
-	private List<Artisti>artistiListaus;
-	@OneToMany(cascade=CascadeType.ALL, mappedBy = "tyyppi")
-	private List<Kategoria>kategoriaListaus;
+	@ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "keikka_artisti", 
+            joinColumns = { @JoinColumn(name = "keikka_id") }, 
+            inverseJoinColumns = { @JoinColumn(name = "artisti_id") }
+        )
+	private List<Artisti> artistiListaus;
+	@ManyToOne
+	@JoinColumn(name="kategoriaId")
+	private Kategoria kategoria;
 	
-	public Keikka(String keikanNimi, String pvm, double hinta, String lokaatio) {
+	public Keikka(String keikanNimi, String pvm, double hinta, String lokaatio, List<Artisti> artistiListaus, Kategoria kategoria) {
 		super();
 		this.keikanNimi = keikanNimi;
 		this.pvm = pvm;
 		this.hinta = hinta;
 		this.lokaatio = lokaatio;
+		this.artistiListaus = artistiListaus;
+		this.kategoria= kategoria;
 	}
 	
 	public Keikka() {
 		
 	}
+	
+	
 
 	public Long getKeikkaId() {
 		return keikkaId;
@@ -87,13 +102,18 @@ public class Keikka {
 		this.artistiListaus = artistiListaus;
 	}
 
-	public List<Kategoria> getKategoriaListaus() {
-		return kategoriaListaus;
+	public Kategoria getKategoria() {
+		return kategoria;
 	}
 
-	public void setKategoriaListaus(List<Kategoria> kategoriaListaus) {
-		this.kategoriaListaus = kategoriaListaus;
+	public void setKategoria(Kategoria kategoria) {
+		this.kategoria = kategoria;
 	}
+
+
+
+	
+
 
 	
 	

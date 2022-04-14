@@ -17,12 +17,18 @@ public class KategoriaController {
 	@Autowired
 	KategoriaRepository kaRepository;
 	
-	
+	//hae kategoriat
 	@RequestMapping(value="/kategoriat", method = RequestMethod.GET)
 	public String getKategoria(Model model){
 		List<Kategoria>kategoriat = (List<Kategoria>)kaRepository.findAll();
 		model.addAttribute("kategoriat",kategoriat);
 		return"kategoriat";
 		
+	}
+	
+	@RequestMapping(value="/savekategoria", method = RequestMethod.POST)
+	public String save(Kategoria kategoria) {
+		kaRepository.save(kategoria);
+		return "redirect:kategoriat";
 	}
 }
