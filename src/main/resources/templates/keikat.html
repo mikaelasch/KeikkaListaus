@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Keikat</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />   
+</head>
+<body>
+	<h1>Keikat</h1>
+	<table>
+		<tr>
+			<th>Keikan nimi</th>
+			<th>Päivämäärä</th>
+			<th>Hinta</th>
+			<th>Lokaatio</th>
+			<th>Artisti</th>
+			<th>Tyyppi</th>
+			<th>Genre</th>
+		</tr>
+
+		<tr th:each="keikka : ${keikat}">
+			<td th:text="${keikka.keikanNimi}">keikanNimi </td>
+			<td th:text="${keikka.pvm}">pvm</td>
+			<td th:text="${keikka.hinta}">hinta</td>
+			<td th:text="${keikka.lokaatio}">lokaatio</td>
+		</tr>
+		
+	</table>
+	
+</body>
+</html>

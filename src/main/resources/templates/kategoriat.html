@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Kategoriat</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />   
+</head>
+<body>
+	<h1>Kategoriat</h1>
+	<table>
+		<tr>
+			<th>Tyyppi</th>
+			<th>Genre</th>
+		</tr>
+
+		<tr th:each="kategoria : ${kategoriat}">
+			<td th:text="${kategoria.tyyppi}">artistiNimi </td>
+			<td th:text="${kategoria.genre}">artistiNimi </td>
+		</tr>
+		
+	</table>
+	
+</body>
+</html>

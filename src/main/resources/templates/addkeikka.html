@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>KeikkaListaus</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Lisää keikka</h1>
+	<div>
+		<form th:object="${keikka}" th:action="@{save}" action="#" method="post">
+		  	<label for="knimi">Keikan nimi</label>
+			<input type="text" id="fname" th:field="*{keikanNimi}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="pvm">Pvm</label>
+			<input type="text" id="lname" th:field="*{pvm}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="hinta">Hinta</label>
+			<input type="text" th:field="*{hinta}" />
+			<label for="loc">Lokaatio</label>
+			<input type="text" id="fname" th:field="*{lokaatio}" />
+	
+			<div style="clear: both; display: block; height: 10px;"></div>						
+		  	<label for="artisti">Artisti</label>
+			 <select id="artistil" th:field="*{artisti}" class="form-control">
+       			<option th:each="artisti: ${artistit}" th:value="${artisti.artistiId}" th:text="${artisti.artistiNimi}"></option>
+    		</select>
+    		<select id="ktyyppi" th:field="*{kategoria}" class="form-control">
+       			<option th:each="kategoria: ${kategoriat}" th:value="${kategoria.kategoriaId}" th:text="${kategoria.tyyppi}"></option>
+    		</select>
+    		<select id="kgenre" th:field="*{kategoria}" class="form-control">
+       			<option th:each="kategoria: ${kategoriat}" th:value="${kategoria.kategoriaId}" th:text="${kategoria.genre}"></option>
+    		</select>
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" value="Save"></input>
+		</form>
+	</div>
+</body>
+</html>
