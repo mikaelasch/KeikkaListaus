@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <title>I18N Spring Boot</title>
+  </head>
+  <body>
+    
+    <p data-th-text="#{label.chooseLang}"></p>
+    <ul>
+        <li>
+            <a href="/index?lang=en" data-th-text="#{label.lang.en}"></a>
+        </li>
+        <li>
+            <a href="/index?lang=de" data-th-text="#{label.lang.de}"></a>
+        </li>
+        <li>
+            <a href="/index?lang=fr" data-th-text="#{label.lang.fr}"></a>
+        </li>
+        <li>
+            <a href="/index?lang=fi" data-th-text="#{label.lang.fi}"></a>
+    </ul>
+    
+    <table>
+        <tr>
+          <th data-th-text="#{label.keikka.keikanNimi}"></th>
+          <th data-th-text="#{label.keikka.pvm}"></th>
+          <th data-th-text="#{label.keikka.lokaatio}"></th>
+        </tr>
+	    <tr th:each="keikka : ${keikat}">
+	        <td data-th-text="#{__${keikka.keikanNimi}__}"></td>
+		    <td data-th-text="${keikka.pvm}" />
+		    <td data-th-text="${keikka.lokaatio}" />
+	    </tr>
+    </table>
+    
+  </body>
+</html>

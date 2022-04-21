@@ -1,5 +1,6 @@
 package hh.swd20.KeikkaListaus.domain;
 
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 
@@ -24,7 +27,7 @@ public class Keikka {
 	private Long keikkaId;
 	private String keikanNimi;
 	private String pvm;
-	private double hinta;
+	private double hinta; 
 	private String lokaatio;
 	
 	@ManyToMany(cascade = { CascadeType.ALL })
@@ -33,12 +36,14 @@ public class Keikka {
             joinColumns = { @JoinColumn(name = "keikka_id") }, 
             inverseJoinColumns = { @JoinColumn(name = "artisti_id") }
         )
-	private List<Artisti> artistiListaus;
+	private List<Artisti> artistiListaus;  
 	@ManyToOne
-	@JoinColumn(name="kategoriaId")
-	private Kategoria kategoria;
+	 @JsonIgnoreProperties("keikka")
+	@JoinColumn(name="kategoria_id")
+	private Kategoria kategoria; 
 	
-	public Keikka(String keikanNimi, String pvm, double hinta, String lokaatio, List<Artisti> artistiListaus, Kategoria kategoria) {
+	
+	public Keikka(String keikanNimi, String pvm, double hinta, String lokaatio, List<Artisti> artistiListaus,  Kategoria kategoria) {
 		super();
 		this.keikanNimi = keikanNimi;
 		this.pvm = pvm;
@@ -48,11 +53,18 @@ public class Keikka {
 		this.kategoria= kategoria;
 	}
 	
+	/*
+	public void ListToString() {
+	    List<List<Artisti>> artList = Arrays.asList(artistiListaus); 
+
+	    
+	}*/ //yritä saada lista stringiks
+	
 	public Keikka() {
 		
 	}
 	
-	
+
 
 	public Long getKeikkaId() {
 		return keikkaId;
@@ -100,7 +112,7 @@ public class Keikka {
 
 	public void setArtistiListaus(List<Artisti> artistiListaus) {
 		this.artistiListaus = artistiListaus;
-	}
+	} 
 
 	public Kategoria getKategoria() {
 		return kategoria;
@@ -112,7 +124,13 @@ public class Keikka {
 
 
 
-	
+
+
+	@Override
+	public String toString() {
+		return "Keikka [kysymysId=" + keikkaId + ", keikanNimi=" + keikanNimi + ", pvm=" + pvm + ", hinta="
+				+ hinta + ", lokaatio=" + lokaatio +",kategoria" + kategoria+"]";
+	}
 
 
 	

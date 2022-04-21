@@ -7,7 +7,7 @@
 <body>
 	<h1>Kategoriat</h1>
 	
-		<form method="post" action="#" th:action="@{/savekategoria}" th:object= ${kategoriat} > 
+		<form method="post" action="#" th:action="@{/savekategoria}" th:object= ${kategoria} > 
  		<p>Tyyppi: <input type="text" th:field="${kategoria.tyyppi}" /></p>
  		<p>Genre: <input type="text" th:field="${kategoria.genre}"/></p>
 		<input type="submit" value="Submit" />

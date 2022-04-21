@@ -1,33 +1,62 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Keikat</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />   
 </head>
 <body>
-	<h1>Keikat</h1>
-	<table>
-		<tr>
-			<th>Keikan nimi</th>
-			<th>Päivämäärä</th>
-			<th>Hinta</th>
-			<th>Lokaatio</th>
-			<th>Artisti</th>
-			<th>Tyyppi</th>
-			<th>Genre</th>
-		</tr>
 
+	<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
+	<h2 data-th-text="#{label.chooseLang}"></h2>
+       <ul>
+        <li>
+            <a href="/keikat?lang=en" data-th-text="#{label.lang.en}"></a>
+        </li>
+       
+        <li>
+            <a href="/keikat?lang=fi" data-th-text="#{label.lang.fi}"></a>
+         </li>
+         
+         <li>
+          <a href="/keikat?lang=sv" data-th-text="#{label.lang.sv}"></a>
+         </li>
+		</ul>
+	
+	<h1 data-th-text="#{label.title}"></h1>
+	<table>
+
+        <tr>
+          <th data-th-text="#{label.keikka.keikanNimi}"></th>
+          <th data-th-text="#{label.keikka.pvm}"></th>
+          <th data-th-text="#{label.keikka.hinta}"></th>
+          <th data-th-text="#{label.keikka.lokaatio}"></th>
+          <th data-th-text="#{label.keikka.kategoria.tyyppi}"></th>
+            <th data-th-text="#{label.keikka.kategoria.genre}"></th>
+        </tr>
+	
 		<tr th:each="keikka : ${keikat}">
 			<td th:text="${keikka.keikanNimi}">keikanNimi </td>
 			<td th:text="${keikka.pvm}">pvm</td>
 			<td th:text="${keikka.hinta}">hinta</td>
 			<td th:text="${keikka.lokaatio}">lokaatio</td>
-			<td	th:text="${keikka.artisti.artistiNimi}">artistinimi</td>
-			<td	th:text="${keikka.kategoria.tyyppi}"> tyyppi</td>
-			<td th:text="${keikka.kategoria.genre}">genre</td>
+			<!--  <td	th:text="${keikka.artistiListaus}">artistinimi</td> -->
+		
+		 	<td	th:text="${keikka.kategoria.tyyppi}"> tyyppi</td>
+			<td th:text="${keikka.kategoria.genre}">genre</td> 
+			<td sec:authorize="hasAuthority('ADMIN')">
+ 		<a th:href="@{/delete/{id}(id=${keikka.keikkaId})}" class="btn btn-xs btn-danger">Delete</a></td>    
 		</tr>
 		
 	</table>
 	
+	
+    <a href="/addkategoria"><button>Lisää kategoria</button></a>
+	<a href="/artistit"><button>Artistit</button></a>
+	<a href="/addkeikka"><button>Lisää keikka</button></a>
 </body>
 </html>

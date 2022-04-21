@@ -25,6 +25,18 @@ public class ArtistiController {
 		return"artistit";
 	}
 	
+	//Lisää keikka kategoria 
+	 @RequestMapping(value = "/addartisti", method=RequestMethod.GET)
+	    public String addArtisti(Model model){
+	    	model.addAttribute("artisti", new Artisti());
+	        return "artistit";
+	    }     
+//tallenna artisti
+@RequestMapping(value="/saveartisti", method = RequestMethod.POST)
+public String save(Artisti artisti) {
+	aRepository.save(artisti);
+	return "redirect:artistit";
+}
 	
 	
 }

@@ -3,6 +3,7 @@ package hh.swd20.KeikkaListaus.domain;
 
 import java.util.List;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,11 +22,10 @@ public class Artisti {
 	private String artistiNimi;
 	
 	@ManyToMany(mappedBy = "artistiListaus")
-	private List <Keikka> keikat;
-
+	private List <Keikka> keikat; 
 	
 	
-	public Artisti(String artistiNimi, List<Keikka> keikat) {
+	public Artisti(String artistiNimi,List<Keikka> keikat ) {
 		super();
 		this.artistiNimi = artistiNimi;
 		this.keikat = keikat;
@@ -45,7 +45,7 @@ public class Artisti {
 
 	public void setKeikat(List<Keikka> keikat) {
 		this.keikat = keikat;
-	}
+	} 
 
 	public Long getArtistiId() {
 		return artistiId;

@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 
 @Entity
@@ -21,6 +23,7 @@ public class Kategoria {
 	private String genre;
 
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "kategoria")
+	@JsonIgnoreProperties("kategoria")
 	private List <Keikka> keikat;
 	
 	public Kategoria(String tyyppi, String genre, List <Keikka> keikat) {
